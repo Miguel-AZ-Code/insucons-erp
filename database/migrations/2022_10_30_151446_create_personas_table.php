@@ -15,6 +15,20 @@ return new class extends Migration
     {
         Schema::create('personas', function (Blueprint $table) {
             $table->id();
+            $table->string('ci')->nullable();
+            $table->string('nombre');
+            $table->string('telefono')->nullable();
+            $table->string('direccion')->nullable();
+            //cliente
+            $table->string('nit')->nullable();
+            //el cliente puede ser una persona o una empresa
+            $table->string('tipo')->nullable(); //
+            //Empleado
+            $table->date('fecha_nacimiento')->nullable();
+
+            //solapamiento incompleto
+            $table->boolean('T_C');
+            $table->boolean('T_E');
             $table->timestamps();
         });
     }
