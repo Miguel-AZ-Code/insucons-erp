@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Nota;
+use App\Models\Persona;
+use App\Models\Proveedor;
 use Illuminate\Http\Request;
 
 class NotaController extends Controller
@@ -14,7 +16,10 @@ class NotaController extends Controller
      */
     public function index()
     {
-        //
+        $notas = Nota::paginate();
+
+        return view('admin.notas.index', compact('notas'))
+            ->with('i', (request()->input('page', 1) - 1) * $notas->perPage());
     }
 
     /**
@@ -24,7 +29,10 @@ class NotaController extends Controller
      */
     public function create()
     {
-        //
+        $notas = new Nota();
+        $personas = Persona::where('T_E', '0')->pluck('nombre', 'id');
+        $proveedores = Proveedor::pluck('nombre', 'id');
+        return view('admin.notas.create', compact('notas', 'personas', 'proveedores'));
     }
 
     /**
@@ -35,51 +43,68 @@ class NotaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        Nota::create($request->all());
+
+        return redirect()->route('admin.notas.index')
+            ->with('success', 'Nota created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Nota  $nota
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Nota $nota)
+    public function show($id)
     {
-        //
+        $nota = Nota::find($id);
+
+        return view('admin.notas.show', compact('nota'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Nota  $nota
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Nota $nota)
+    public function edit($id)
     {
-        //
+        $notas = Nota::find($id);
+        $personas = Persona::where('T_E', '0')->pluck('nombre', 'id');
+        $proveedores = Proveedor::pluck('nombre', 'id');
+
+        return view('admin.notas.edit', compact('notas', 'personas', 'proveedores'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Nota  $nota
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Nota $nota)
+    public function update(Request $request, $id)
     {
-        //
+
+        $nota = Nota::find($id);
+        $nota->update($request->all());
+
+        return redirect()->route('admin.notas.index')
+            ->with('success', 'Nota updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Nota  $nota
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Nota $nota)
+    public function destroy($id)
     {
-        //
+        Nota::find($id)->delete();
+        return redirect()->route('admin.notas.index')
+            ->with('success', 'Material deleted successfully');
     }
 }
