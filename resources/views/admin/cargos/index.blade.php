@@ -17,12 +17,10 @@
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                            <span id="card_title">
-                                {{-- {{ __(' lista de Medida') }} --}}
-                            </span>
+
 
                             <div class="float-right">
-                                <a href="{{ route('admin.marcas.create') }}" class="btn btn-primary btn-sm float-right"
+                                <a href="{{ route('admin.cargos.create') }}" class="btn btn-primary btn-sm float-right"
                                     data-placement="left">
                                     {{ __('Create New') }}
                                 </a>
@@ -41,25 +39,28 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>ID</th>
+
                                         <th>Nombre</th>
-                                        <th></th>
+
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($marcas as $marca)
+
+                                    @foreach ($cargos as $cargo)
                                         <tr>
-                                            <td>{{ $marca->id }}</td>
-                                            <td>{{ $marca->nombre }}</td>
+                                            <td>{{ $cargo->id }}</td>
+
+                                            <td>{{ $cargo->nombre }}</td>
 
                                             <td>
-                                                <form action="{{ route('admin.marcas.destroy', $marca->id) }}"
+                                                <form action="{{ route('admin.cargos.destroy', $cargo->id) }}"
                                                     method="POST">
-                                                    {{-- <a class="btn btn-sm btn-primary "
-                                                        href="{{ route('admin.medidas.show', $medida->id) }}"><i
-                                                            class="fa fa-fw fa-eye"></i> Show</a> --}}
+                                                    <a class="btn btn-sm btn-primary "
+                                                        href="{{ route('admin.cargos.show', $cargo->id) }}"><i
+                                                            class="fa fa-fw fa-eye"></i> Show</a>
                                                     <a class="btn btn-sm btn-success"
-                                                        href="{{ route('admin.marcas.edit', $marca->id) }}"><i
+                                                        href="{{ route('admin.cargos.edit', $cargo->id) }}"><i
                                                             class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
@@ -74,7 +75,7 @@
                         </div>
                     </div>
                 </div>
-                {{-- {!! $marcas->links() !!} --}}
+                {!! $cargos->links() !!}
             </div>
         </div>
     </div>

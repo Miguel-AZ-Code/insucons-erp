@@ -140,9 +140,9 @@ Route::screen('/backup', BackupScreen::class)->name('platform.backup');
 Route::get('log', [ActivityLogController::class, 'index'])->middleware('access:platform.activity');
 Route::get('print',[UsuariosReportController::class, 'imprimir'])->name('printUsuarios');
 
+
 Route::resource('medidas',MedidaController::class)->names('admin.medidas');
 Route::resource('marcas',MarcaController::class)->names('admin.marcas');
-
 Route::resource('proveedores', ProveedorController::class)->names('admin.proveedores');
 Route::resource('cargos',CargoController::class)->names('admin.cargos');
 Route::resource('personas',PersonaController::class)->names('admin.personas');

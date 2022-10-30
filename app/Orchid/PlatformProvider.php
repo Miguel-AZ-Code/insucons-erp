@@ -28,11 +28,6 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerMainMenu(): array
     {
         return [
-
-
-
-
-
             Menu::make(__('Users'))
                 ->icon('user')
                 ->route('platform.systems.users')
@@ -43,6 +38,7 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.systems.roles')
                 ->permission('platform.systems.roles')
                 ->divider(),
+
             Menu::make('Personal')  //
                 ->icon('friends')
                 ->list([
@@ -60,22 +56,20 @@ class PlatformProvider extends OrchidServiceProvider
                         ->route('admin.contratos.index'),
 
                 ]),
+
             Menu::make('Entradas y salidas')  //
                 ->icon('basket-loaded')
                 ->list([
                     Menu::make('facturas')
-                        ->icon('layers')
-                        ->route('platform.main'),
+                        ->icon('layers'),
+                        // ->route('platform.main'),
                     Menu::make('Notas')
                         ->icon('layers')
                         ->route('admin.notas.index'),
                     Menu::make('metodo de pago')
-                        ->icon('layers')
-                        ->route('platform.main'),
-
-
+                        ->icon('layers'),
+                        // ->route('platform.main'),
                 ]),
-
 
             Menu::make('Productos y servicios')  // completo
                 ->icon('bag')
@@ -93,10 +87,6 @@ class PlatformProvider extends OrchidServiceProvider
                         ->icon('layers')
                         ->route('admin.marcas.index'),
                 ]),
-
-
-
-
 
             Menu::make('Proyectos')
                 ->icon('home')
