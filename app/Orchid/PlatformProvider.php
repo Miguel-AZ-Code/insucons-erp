@@ -29,6 +29,10 @@ class PlatformProvider extends OrchidServiceProvider
     {
         return [
 
+
+
+
+
             Menu::make(__('Users'))
                 ->icon('user')
                 ->route('platform.systems.users')
@@ -39,10 +43,60 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.systems.roles')
                 ->permission('platform.systems.roles')
                 ->divider(),
+            Menu::make('Personal')  //
+                ->icon('friends')
+                ->list([
+                    Menu::make('personas')
+                        ->icon('layers')
+                        ->route('admin.personas.index'),
+                    Menu::make('proveedor')
+                        ->icon('layers')
+                        ->route('admin.proveedores.index'),
+                    Menu::make('cargos')
+                        ->icon('layers')
+                        ->route('admin.cargos.index'),
+                    Menu::make('contratos')
+                        ->icon('layers')
+                        ->route('admin.contratos.index'),
 
-            Menu::make('Medidas')
-                ->icon('layers')
-                ->route('admin.medidas.index'),
+                ]),
+            Menu::make('Entradas y salidas')  //
+                ->icon('basket-loaded')
+                ->list([
+                    Menu::make('facturas')
+                        ->icon('layers')
+                        ->route('platform.main'),
+                    Menu::make('Notas')
+                        ->icon('layers')
+                        ->route('admin.notas.index'),
+                    Menu::make('metodo de pago')
+                        ->icon('layers')
+                        ->route('platform.main'),
+
+
+                ]),
+
+
+            Menu::make('Productos y servicios')  // completo
+                ->icon('bag')
+                ->list([
+                    Menu::make('Servicios')
+                        ->icon('layers')
+                        ->route('admin.servicios.index'),
+                    Menu::make('Materiales')
+                        ->icon('layers')
+                        ->route('admin.materiales.index'),
+                    Menu::make('Medidas')
+                        ->icon('layers')
+                        ->route('admin.medidas.index'),
+                    Menu::make('Marcas')
+                        ->icon('layers')
+                        ->route('admin.marcas.index'),
+                ]),
+
+
+
+
 
             Menu::make('Proyectos')
                 ->icon('home')

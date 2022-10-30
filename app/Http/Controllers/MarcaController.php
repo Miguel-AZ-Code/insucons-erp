@@ -7,14 +7,15 @@ use Illuminate\Http\Request;
 
 class MarcaController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $marcas = Marca::all();
+        return view('admin.marcas.index', compact('marcas'));
     }
 
     /**
@@ -24,7 +25,7 @@ class MarcaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.marcas.create');
     }
 
     /**
@@ -35,16 +36,24 @@ class MarcaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'nombre' => 'required',
+        ]);
+        $marca = Marca::Create([
+            'nombre' => $request->nombre,
+        ]);
+        return redirect()->route('admin.marcas.index')->with('info', 'La Marca se ha registrado correctamente');
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Marca  $marca
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Marca $marca)
+    public function show($id)
     {
         //
     }
@@ -52,34 +61,40 @@ class MarcaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Marca  $marca
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit(Marca $marca)
     {
-        //
+        return view('admin.marcas.edit', compact('marca'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Marca  $marca
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Marca $marca)
+    public function update(Request $request,  Marca $marca)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+        ]);
+        $marca->update($request->all());
+        return redirect()->route('admin.marcas.edit', $marca)->with('info', 'Los Datos se Editaron correctamente');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Marca  $marca
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Marca $marca)
+    public function destroy(Request $request,Marca $marca)
     {
-        //
+        $marca->delete();
+
+        return back()->with('info','La Marca ha sido eliminada correctamente');
     }
 }

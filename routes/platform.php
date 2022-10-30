@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\ActivityLogController;
+use App\Http\Controllers\CargoController;
 use App\Http\Controllers\MedidaController;
 use App\Http\Controllers\UsuariosReportController;
 use App\Orchid\Screens\BackupScreen;
@@ -22,6 +23,14 @@ use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
+use App\Http\Controllers\MarcaController;
+use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\MaterialservicioController;
+use App\Http\Controllers\NotaController;
+use App\Http\Controllers\PersonaController;
+use App\Http\Controllers\ProveedorController;
+use App\Http\Controllers\ServicioController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -132,4 +141,28 @@ Route::get('log', [ActivityLogController::class, 'index'])->middleware('access:p
 Route::get('print',[UsuariosReportController::class, 'imprimir'])->name('printUsuarios');
 
 Route::resource('medidas',MedidaController::class)->names('admin.medidas');
+Route::resource('marcas',MarcaController::class)->names('admin.marcas');
+
+Route::resource('proveedores', ProveedorController::class)->names('admin.proveedores');
+Route::resource('cargos',CargoController::class)->names('admin.cargos');
+Route::resource('personas',PersonaController::class)->names('admin.personas');
+Route::resource('contratos',Cargoempleado::class)->names('admin.contratos');//       ojo
+Route::resource('servicios',ServicioController::class)->names('admin.servicios');
+Route::resource('materiales',MaterialController::class)->names('admin.materiales');
+Route::resource('notas',NotaController::class)->names('admin.notas');
+Route::resource('items',MaterialservicioController::class)->names('admin.items');//   ojo
 //Route::screen('idea', Idea::class, 'platform.screens.idea');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
