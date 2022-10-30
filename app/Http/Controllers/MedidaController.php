@@ -14,7 +14,10 @@ class MedidaController extends Controller
      */
     public function index()
     {
-        //
+        $medidas = Medida::paginate();
+
+        return view('admin.medidas.index', compact('medidas'))
+            ->with('i', (request()->input('page', 1) - 1) * $medidas->perPage());
     }
 
     /**
@@ -24,7 +27,8 @@ class MedidaController extends Controller
      */
     public function create()
     {
-        //
+        $medidas = new Medida();
+        return view('admin.medidas.create', compact('medidas'));
     }
 
     /**
@@ -35,51 +39,66 @@ class MedidaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        Medida::create($request->all());
+
+        return redirect()->route('admin.medidas.index')
+            ->with('success', 'Medida created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Medida  $medida
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Medida $medida)
+    public function show($id)
     {
-        //
+        $medidas = Medida::find($id);
+
+        return view('admin.medidas.show', compact('medidas'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Medida  $medida
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Medida $medida)
+    public function edit($id)
     {
-        //
+        $medidas = Medida::find($id);
+
+        return view('admin.medidas.edit', compact('medidas'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Medida  $medida
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Medida $medida)
     {
-        //
+
+        $medida->update($request->all());
+
+        return redirect()->route('admin.medidas.index')
+            ->with('success', 'Medida updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Medida  $medida
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Medida $medida)
+    public function destroy($id)
     {
-        //
+        Medida::find($id)->delete();
+
+        return redirect()->route('admin.medidas.index')
+            ->with('success', 'Medida deleted successfully');
     }
 }

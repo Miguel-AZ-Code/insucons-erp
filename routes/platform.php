@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\ActivityLogController;
+use App\Http\Controllers\MedidaController;
 use App\Http\Controllers\UsuariosReportController;
 use App\Orchid\Screens\BackupScreen;
 use App\Orchid\Screens\EmailSenderScreen;
@@ -129,4 +130,6 @@ Route::screen('/backup', BackupScreen::class)->name('platform.backup');
 // Route::resource('/log', ActivityLogController::class)->middleware('access:platform.activity')->names('platform.activity');
 Route::get('log', [ActivityLogController::class, 'index'])->middleware('access:platform.activity');
 Route::get('print',[UsuariosReportController::class, 'imprimir'])->name('printUsuarios');
+
+Route::resource('medidas',MedidaController::class)->names('admin.medidas');
 //Route::screen('idea', Idea::class, 'platform.screens.idea');

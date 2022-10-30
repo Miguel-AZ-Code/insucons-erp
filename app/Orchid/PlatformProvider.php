@@ -40,6 +40,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->permission('platform.systems.roles')
                 ->divider(),
 
+            Menu::make('Medidas')
+                ->icon('layers')
+                ->route('admin.medidas.index'),
+
             Menu::make('Proyectos')
                 ->icon('home')
                 ->list([
