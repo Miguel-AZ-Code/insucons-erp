@@ -15,6 +15,15 @@ return new class extends Migration
     {
         Schema::create('materials', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
+            $table->string('descripcion')->nullable();
+            $table->double('precio',9,2)->nullable();
+            $table->unsignedBigInteger('medida_id')
+            ->foreign('medida_id')->references('id')->on('medidas')
+            ->onDelete('cascade');
+            $table->unsignedBigInteger('marca_id')
+            ->foreign('marca_id')->references('id')->on('marcas')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

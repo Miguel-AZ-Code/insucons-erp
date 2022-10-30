@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Materialservicio extends Model
 {
     use HasFactory;
+
 }

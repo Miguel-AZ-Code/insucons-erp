@@ -21,6 +21,6 @@ class Medida extends Model
 
     public function materiales()
     {
-        return $this->hasMany('App\Models\Materiale', 'medida_id', 'id');
+        return $this->hasMany('App\Models\Material', 'medida_id', 'id');
     }
 }

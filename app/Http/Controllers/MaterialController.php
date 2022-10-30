@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Material;
 use Illuminate\Http\Request;
+use App\Models\Medida;
+use App\Models\Marca;
 
 class MaterialController extends Controller
 {
@@ -14,7 +16,10 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        //
+        $materiales = Material::paginate();
+
+        return view('admin.materiales.index', compact('materiales'))
+            ->with('i', (request()->input('page', 1) - 1) * $materiales->perPage());
     }
 
     /**
@@ -24,7 +29,10 @@ class MaterialController extends Controller
      */
     public function create()
     {
-        //
+        $materiales = new Material();
+        $marcas= Marca::pluck('nombre','id');//consulta la base de datos utilizando nombre y id
+        $medidas= Medida::pluck('unidad','id');//consulta la base de datos utilizando nombre y id
+        return view('admin.materiales.create', compact('materiales','marcas','medidas'));
     }
 
     /**
@@ -35,51 +43,71 @@ class MaterialController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        Material::create($request->all());
+
+        return redirect()->route('admin.materiales.index')
+            ->with('success', 'Material created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Material  $material
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Material $material)
+    public function show($id)
     {
-        //
+        $materiales = Material::find($id);
+        // $marcas= Marca::pluck('nombre','id');//consulta la base de datos utilizando nombre y id
+        // $medidas= Medida::pluck('unidad','id');
+        return view('admin.materiales.show', compact('materiales'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Material  $material
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Material $material)
+    public function edit($id)
     {
-        //
+        $materiales = Material::find($id);
+        $marcas= Marca::pluck('nombre','id');//consulta la base de datos utilizando nombre y id
+        $medidas= Medida::pluck('unidad','id');
+        return view('admin.materiales.edit', compact('materiales','marcas','medidas'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Material  $material
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Material $material)
+    public function update(Request $request, $id)
     {
-        //
+
+         $material=Material::find($id);
+        $material->update($request->all());
+
+        return redirect()->route('admin.materiales.index')
+            ->with('success', 'material updated successfully');
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Material  $material
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Material $material)
+    public function destroy($id)
     {
-        //
+         Material::find($id)->delete();
+
+        return redirect()->route('admin.materiales.index')
+            ->with('success', 'Material deleted successfully');
     }
 }
