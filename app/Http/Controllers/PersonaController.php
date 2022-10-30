@@ -14,7 +14,10 @@ class PersonaController extends Controller
      */
     public function index()
     {
-        //
+        $personas = Persona::paginate();
+
+        return view('admin.personas.index', compact('personas'))
+            ->with('i', (request()->input('page', 1) - 1) * $personas->perPage());
     }
 
     /**
@@ -24,7 +27,8 @@ class PersonaController extends Controller
      */
     public function create()
     {
-        //
+        $persona = new Persona();
+        return view('admin.personas.create', compact('persona'));
     }
 
     /**
@@ -35,51 +39,88 @@ class PersonaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'ci'=>'required',
+            'nombre' => 'required',
+            'telefono'=>'required',
+            'direccion'=>'required',
+            'nit'=>'required',
+            'tipo'=>'required',
+            'fecha_nacimiento'=>'required',
+		     'T_C' => 'required',
+		     'T_E' => 'required',
+        ]);
+
+         Persona::create($request->all());
+
+        return redirect()->route('admin.personas.index')
+            ->with('success', 'Persona created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Persona  $persona
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Persona $persona)
+    public function show($id)
     {
-        //
+        $persona = Persona::find($id);
+
+        return view('admin.personas.show', compact('persona'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Persona  $persona
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Persona $persona)
+    public function edit($id)
     {
-        //
+        $persona = Persona::find($id);
+
+        return view('admin.personas.edit', compact('persona'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Persona  $persona
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Persona $persona)
     {
-        //
+        $request->validate([
+            'ci'=>'required',
+            'nombre' => 'required',
+            'telefono'=>'required',
+            'direccion'=>'required',
+            'nit'=>'required',
+            'tipo'=>'required',
+            'fecha_nacimiento'=>'required',
+		     'T_C' => 'required',
+		     'T_E' => 'required',
+        ]);
+
+        $persona->update($request->all());
+
+        return redirect()->route('admin.personas.index')
+            ->with('success', 'Persona updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Persona  $persona
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Persona $persona)
+    public function destroy($id)
     {
-        //
+        Persona::find($id)->delete();
+
+        return redirect()->route('admin.personas.index')
+            ->with('success', 'Persona deleted successfully');
     }
 }
