@@ -54,8 +54,7 @@ class PlatformProvider extends OrchidServiceProvider
                     Menu::make('contrato')
                         ->icon('graduation')
                         ->route('admin.contratos.index'),
-
-                ]),
+                ])->permission('platoform.personal.menu'),
 
             Menu::make('Entradas y salidas')  //
                 ->icon('basket-loaded')
@@ -69,7 +68,7 @@ class PlatformProvider extends OrchidServiceProvider
                     Menu::make('metodo de pago')
                         ->icon('credit-card'),
                     // ->route('platform.main'),
-                ]),
+                ])->permission('platform.entradas.menu'),
 
             Menu::make('Productos y servicios')  // completo
                 ->icon('bag')
@@ -86,9 +85,7 @@ class PlatformProvider extends OrchidServiceProvider
                     Menu::make('Servicios')
                         ->icon('chart')
                         ->route('admin.servicios.index'),
-
-
-                ]),
+                ])->permission('platform.servicios.menu'),
 
             Menu::make('Proyectos')
                 ->icon('home')
@@ -161,6 +158,15 @@ class PlatformProvider extends OrchidServiceProvider
                 ->addPermission('platform.systems.roles', __('Roles'))
                 ->addPermission('platform.systems.users', __('Users'))
                 ->addPermission('platform.email', __('Correos')),
+
+            ItemPermission::group('Personal')
+                ->addPermission('platform.personal.menu', 'Menu Personas'),
+
+            ItemPermission::group('Entradas y Salidas')
+                ->addPermission('platform.entradas.menu', 'Menu Entradas y salidas'),
+
+            ItemPermission::group('Productos y Servicios')
+                ->addPermission('platform.servicios.menu', 'Menu Productos y servicios'),
 
             ItemPermission::group('Proyectos')
                 ->addPermission('platform.projects.list', 'Menu Proyecto')
