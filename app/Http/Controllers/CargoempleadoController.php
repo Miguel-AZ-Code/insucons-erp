@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Cargoempleado;
 use Illuminate\Http\Request;
+use App\Models\Cargo;
+use App\Models\Persona;
 
 class CargoempleadoController extends Controller
 {
@@ -14,7 +16,15 @@ class CargoempleadoController extends Controller
      */
     public function index()
     {
-        //
+
+        $cargoempleados = Cargoempleado::paginate();
+       // $personas=Persona::where('T_E','0')->pluck('nombre','id');
+        $personas= Persona::select('nombre','id')->where('T_E','0')->get();//  ojo revisar :v
+        $cargos=Cargo::all();
+      //$cargo=Cargo::pluck('nombre','id');
+        return view('admin.cargoempleados.index', compact('personas','cargos','cargoempleados'))
+        ->with('i', (request()->input('page', 1) - 1) * $cargoempleados->perPage());
+
     }
 
     /**
@@ -24,7 +34,12 @@ class CargoempleadoController extends Controller
      */
     public function create()
     {
-        //
+
+        $cargoempleado = new Cargoempleado();
+        //$persona= Persona::select('nombre','id')->where('T_E','0')->get();
+        $personas=Persona::where('T_E','0')->pluck('nombre','id');
+        $cargos=Cargo::pluck('nombre','id');
+        return view('admin.cargoempleados.create', compact('cargoempleado','personas','cargos'));
     }
 
     /**
@@ -35,51 +50,73 @@ class CargoempleadoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+      Cargoempleado::create($request->all());
+
+        return redirect()->route('admin.contratos.index')
+            ->with('success', 'Cargoempleado created successfully.');;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Cargoempleado  $cargoempleado
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Cargoempleado $cargoempleado)
+    public function show($id)
     {
-        //
+
+        //hacer una mejor consulta y mandarlo desde aqui para mostrar
+        $cargoempleado = Cargoempleado::find($id);
+        $personas= Persona::select('nombre','id')->where('T_E','0')->get();//  ojo revisar :v
+        $cargos=Cargo::all();
+
+        return view('admin.cargoempleados.show', compact('cargoempleado','personas','cargos'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Cargoempleado  $cargoempleado
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cargoempleado $cargoempleado)
+    public function edit($id)
     {
-        //
+        $cargoempleado = Cargoempleado::find($id);
+        $personas=Persona::where('T_E','0')->pluck('nombre','id');
+        $cargos=Cargo::pluck('nombre','id');
+
+        return view('admin.cargoempleados.edit', compact('cargoempleado','personas','cargos'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Cargoempleado  $cargoempleado
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cargoempleado $cargoempleado)
+    public function update(Request $request,  $id)
     {
-        //
+        $cargoempleado=Cargoempleado::find($id);
+        $cargoempleado->update($request->all());
+
+        return redirect()->route('admin.contratos.index')
+            ->with('success', 'Cargoempleado updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Cargoempleado  $cargoempleado
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cargoempleado $cargoempleado)
+    public function destroy($id)
     {
-        //
+        Cargoempleado::find($id)->delete();
+
+        return redirect()->route('admin.contratos.index')
+            ->with('success', 'Cargoempleado deleted successfully');
     }
 }

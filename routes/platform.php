@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\CargoController;
+use App\Http\Controllers\CargoempleadoController;
 use App\Http\Controllers\MedidaController;
 use App\Http\Controllers\UsuariosReportController;
 use App\Orchid\Screens\BackupScreen;
@@ -146,7 +147,7 @@ Route::resource('marcas',MarcaController::class)->names('admin.marcas');
 Route::resource('proveedores', ProveedorController::class)->names('admin.proveedores');
 Route::resource('cargos',CargoController::class)->names('admin.cargos');
 Route::resource('personas',PersonaController::class)->names('admin.personas');
-Route::resource('contratos',Cargoempleado::class)->names('admin.contratos');//       ojo
+Route::resource('contratos',CargoempleadoController::class)->names('admin.contratos');//       ojo
 Route::resource('servicios',ServicioController::class)->names('admin.servicios');
 Route::resource('materiales',MaterialController::class)->names('admin.materiales');
 Route::resource('notas',NotaController::class)->names('admin.notas');

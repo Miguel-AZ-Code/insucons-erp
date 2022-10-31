@@ -15,6 +15,18 @@ return new class extends Migration
     {
         Schema::create('cargoempleados', function (Blueprint $table) {
             $table->id();
+            $table->date('fecha_inicio');//inicio del contrato del cargo
+            $table->date('fecha_fin'); //fin del cargo
+            $table->string('sueldo'); // sueldo del cargo
+
+            $table->unsignedBigInteger('persona_id')
+            ->foreign('persona_id')->references('id')->on('personas')
+            ->onDelete('cascade');
+
+            $table->unsignedBigInteger('cargo_id')
+            ->foreign('cargo_id')->references('id')->on('cargos')
+            ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('descripcion')->nullable();
             $table->double('precio',9,2)->nullable();
+            //agregar futuro stock
             $table->unsignedBigInteger('medida_id')
             ->foreign('medida_id')->references('id')->on('medidas')
             ->onDelete('cascade');
