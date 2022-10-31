@@ -1,12 +1,12 @@
 @extends('platform::dashboard')
 
-@section('title', 'title')
+@section('title', 'Proveedor')
 @section('description', 'description')
 
 @section('navbar')
-    <div class="text-center">
+    {{-- <div class="text-center">
         Navbar
-    </div>
+    </div> --}}
 @stop
 
 @section('content')
@@ -18,12 +18,19 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Update Proveedore</span>
-                        <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('admin.proveedores.index') }}"> Back</a>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span id="card_title">
+                                {{-- {{ __('Proveedores') }} --}}
+                            </span>
+                            <div class="float-right">
+                                <a href="{{ route('admin.proveedores.index') }}" class="btn btn-primary btn-sm float-right"
+                                    data-placement="left">
+                                    {{ __('back') }}
+                                </a>
+                            </div>
+
                         </div>
                     </div>
-
                     <div class="card-body">
                         <form method="POST" action="{{ route('admin.proveedores.update', $proveedore->id) }}"
                             role="form" enctype="multipart/form-data">

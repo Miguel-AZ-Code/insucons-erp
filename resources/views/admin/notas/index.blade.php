@@ -1,12 +1,12 @@
 @extends('platform::dashboard')
 
-@section('title', 'title')
+@section('title', 'Notas')
 @section('description', 'description')
 
 @section('navbar')
-    <div class="text-center">
+    {{-- <div class="text-center">
         Navbar
-    </div>
+    </div> --}}
 @stop
 
 @section('content')
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $notas->links() !!}
+                {{-- {!! $notas->links() !!} --}}
             </div>
         </div>
     </div>

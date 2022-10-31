@@ -1,12 +1,12 @@
 @extends('platform::dashboard')
 
-@section('title', 'title')
+@section('title', 'Medidas')
 @section('description', 'description')
 
 @section('navbar')
-    <div class="text-center">
+    {{-- <div class="text-center">
         Navbar
-    </div>
+    </div> --}}
 @stop
 
 @section('content')
@@ -18,11 +18,21 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Create Medida</span>
-                        <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('admin.medidas.index') }}"> Back</a>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+
+                            <span id="card_title">
+                                {{-- {{ __(' lista de Medida') }} --}}
+                            </span>
+
+                            <div class="float-right">
+                                <a href="{{ route('admin.medidas.index') }}" class="btn btn-primary btn-sm float-right"
+                                    data-placement="left">
+                                    {{ __('Back') }}
+                                </a>
+                            </div>
                         </div>
                     </div>
+
                     <div class="card-body">
                         <form method="POST" action="{{ route('admin.medidas.store') }}" role="form"
                             enctype="multipart/form-data">

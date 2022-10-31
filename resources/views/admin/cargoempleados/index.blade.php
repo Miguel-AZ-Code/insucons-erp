@@ -1,12 +1,12 @@
 @extends('platform::dashboard')
 
-@section('title', 'title')
+@section('title', 'Contratos')
 @section('description', 'description')
 
 @section('navbar')
-    <div class="text-center">
+    {{-- <div class="text-center">
         Navbar
-    </div>
+    </div> --}}
 @stop
 
 @section('content')
@@ -18,7 +18,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Cargoempleado') }}
+                                {{-- {{ __('Cargoempleado') }} --}}
                             </span>
 
                             <div class="float-right">

@@ -40,7 +40,7 @@ class ServicioController extends Controller
     public function store(Request $request)
     {
 
-        Servicio::create($request->all());
+        Servicio::create($request->all());//insert
 
         return redirect()->route('admin.servicios.index')
             ->with('success', 'Servicio created successfully.');

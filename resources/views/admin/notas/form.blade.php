@@ -6,7 +6,7 @@
                 {{ Form::select('persona_id',$personas, $notas->persona_id, ['class' => 'form-control' . ($errors->has('persona_id') ? ' is-invalid' : ''), 'placeholder' => 'Empleado']) }}
                 {!! $errors->first('persona_id', '<div class="invalid-feedback">:message</div>') !!}
             </div>
-            {{ Form::label('tipo') }}
+            {{ Form::label('tipo: entrada/salida') }}
             {{ Form::text('tipo', $notas->tipo, ['class' => 'form-control' . ($errors->has('descripcion') ? ' is-invalid' : ''), 'placeholder' => 'tipo']) }}
             {!! $errors->first('tipo', '<div class="invalid-feedback">:message</div>') !!}
         </div>

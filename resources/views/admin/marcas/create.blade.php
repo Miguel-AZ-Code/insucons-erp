@@ -1,12 +1,12 @@
 @extends('platform::dashboard')
 
-@section('title', 'title')
+@section('title', 'Marca')
 @section('description', 'description')
 
 @section('navbar')
-    <div class="text-center">
+    {{-- <div class="text-center">
         Navbar
-    </div>
+    </div> --}}
 @stop
 
 

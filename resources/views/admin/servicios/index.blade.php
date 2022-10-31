@@ -1,12 +1,12 @@
 @extends('platform::dashboard')
 
-@section('title', 'title')
+@section('title', 'Servicios')
 @section('description', 'description')
 
 @section('navbar')
-    <div class="text-center">
+    {{-- <div class="text-center">
         Navbar
-    </div>
+    </div> --}}
 @stop
 
 @section('content')
@@ -46,7 +46,7 @@
                                         <th>Descripcion</th>
                                         <th>Precio</th>
 
-                                        <th>Acciones</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -1,12 +1,12 @@
 @extends('platform::dashboard')
 
-@section('title', 'title')
+@section('title', 'Nota')
 @section('description', 'description')
 
 @section('navbar')
-    <div class="text-center">
+    {{-- <div class="text-center">
         Navbar
-    </div>
+    </div> --}}
 @stop
 
 @section('content')
@@ -18,11 +18,23 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        {{-- <span class="card-title">Update Nota</span> --}}
-                        <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('admin.notas.index') }}"> Back</a>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+
+                            <span id="card_title">
+                                {{-- {{ __('Persona') }} --}}
+                            </span>
+
+                            <div class="float-right">
+                                <a href="{{ route('admin.notas.index') }}" class="btn btn-primary btn-sm float-right"
+                                    data-placement="left">
+                                    {{ __('BACK') }}
+                                </a>
+                            </div>
                         </div>
                     </div>
+
+
+
                     <div class="card-body">
                         <form method="POST" action="{{ route('admin.notas.update', $notas->id) }}" role="form"
                             enctype="multipart/form-data">
