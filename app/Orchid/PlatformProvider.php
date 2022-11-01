@@ -54,7 +54,7 @@ class PlatformProvider extends OrchidServiceProvider
                     Menu::make('contrato')
                         ->icon('graduation')
                         ->route('admin.contratos.index'),
-                ])->permission('platoform.personal.menu'),
+                ])->permission('platform.personal.menu'),
 
             Menu::make('Entradas y salidas')  //
                 ->icon('basket-loaded')
